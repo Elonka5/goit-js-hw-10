@@ -8,8 +8,10 @@ const elements = {
   catInfo: document.querySelector('.cat-info'),
   loader: document.querySelector('.loader'),
   error: document.querySelector('.error'),
-  spanLoader: document.querySelector('.js-loader')
+  spanLoader: document.querySelector('.js-loader'),
 };
+
+elements.select.addEventListener('change', handlerSelect);
 
 elements.select.hidden = true;
 elements.error.hidden = true;
@@ -41,13 +43,12 @@ function createList(arr) {
     .join('');
 }
 
-elements.select.addEventListener('change', handlerSelect);
-
 function handlerSelect(evt) {
   const userSelect = evt.target.value;
   elements.catInfo.hidden = true;
   elements.loader.hidden = false;
   elements.spanLoader.hidden = false;
+  
   fetchCatByBreed(userSelect)
     .then(info => {
       console.log(info);

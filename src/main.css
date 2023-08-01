@@ -80,3 +80,16 @@ animation: rotate 1s ease-in infinite, moveY 1s ease-in infinite ;
               0.3em 0.3em 1em rgba(0,0,0,0.3);
  }
 
+ .is-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}

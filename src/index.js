@@ -22,8 +22,9 @@ fetchBreeds()
   .then(data => {
     refs.select.innerHTML = createList(data);
     new SlimSelect({
-      select: 'select',
+      select: 'select', 
     });
+    refs.select.classList.remove('is-hidden')
   })
   .catch(error => {
     refs.error.hidden = false;

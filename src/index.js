@@ -3,7 +3,7 @@ import 'slim-select/dist/slimselect.css';
 import Notiflix from 'notiflix';
 import { fetchBreeds, fetchCatByBreed } from './cat-api';
 
-const elements = {
+const refs = {
   select: document.querySelector('.breed-select'),
   catInfo: document.querySelector('.cat-info'),
   loader: document.querySelector('.loader'),
@@ -11,30 +11,30 @@ const elements = {
   spanLoader: document.querySelector('.js-loader'),
 };
 
-elements.select.addEventListener('change', handlerSelect);
+refs.select.addEventListener('change', handlerSelect);
 
-elements.select.hidden = true;
-elements.error.hidden = true;
-elements.loader.hidden = false;
-elements.spanLoader.hidden = false;
+refs.select.hidden = true;
+refs.error.hidden = true;
+refs.loader.hidden = false;
+refs.spanLoader.hidden = false;
 
 fetchBreeds()
   .then(data => {
-    elements.select.innerHTML = createList(data);
+    refs.select.innerHTML = createList(data);
     new SlimSelect({
       select: 'select',
     });
   })
   .catch(error => {
-    elements.error.hidden = false;
+    refs.error.hidden = false;
     Notiflix.Report.failure(
       'Oops! Something went wrong! Try reloading the page!'
     );
   })
   .finally(() => {
-    elements.select.hidden = false;
-    elements.loader.hidden = true;
-    elements.spanLoader.hidden = true;
+    refs.select.hidden = false;
+    refs.loader.hidden = true;
+    refs.spanLoader.hidden = true;
   });
 
 function createList(arr) {
@@ -45,25 +45,25 @@ function createList(arr) {
 
 function handlerSelect(evt) {
   const userSelect = evt.target.value;
-  elements.catInfo.hidden = true;
-  elements.loader.hidden = false;
-  elements.spanLoader.hidden = false;
+  refs.catInfo.hidden = true;
+  refs.loader.hidden = false;
+  refs.spanLoader.hidden = false;
   
   fetchCatByBreed(userSelect)
     .then(info => {
       console.log(info);
-      elements.catInfo.innerHTML = createCatInfo(info);
+      refs.catInfo.innerHTML = createCatInfo(info);
     })
     .catch(error => {
-      elements.error.hidden = false;
+      refs.error.hidden = false;
       Notiflix.Report.failure(
         'Oops! Something went wrong! Try reloading the page!'
       );
     })
     .finally(() => {
-      elements.catInfo.hidden = false;
-      elements.loader.hidden = true;
-      elements.spanLoader.hidden = true;
+      refs.catInfo.hidden = false;
+      refs.loader.hidden = true;
+      refs.spanLoader.hidden = true;
     });
 }
 
